@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="LLM Multi-Agent Orchestration - Detailed">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- USER -->
+        <mxCell id="user" value="User&#10;&#10;• Natural language question" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- CONTEXT BUILDER -->
+        <mxCell id="context" value="Context Builder (Pre-Orchestration)&#10;&#10;Deterministic Lambda&#10;&#10;• Extract Legal Entity ID&#10;• Extract Client ID / CPI&#10;• Load conversation history&#10;• Build enriched prompt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="320" y="200" width="320" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- ORCHESTRATOR -->
+        <mxCell id="orchestrator" value="LLM Orchestrator&#10;&#10;AI-driven&#10;&#10;• Understand intent&#10;• Select sub-agents&#10;• Decide tool usage&#10;• Route requests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="720" y="230" width="300" height="170" as="geometry"/>
+        </mxCell>
+
+        <!-- EXTERNAL AGENTS -->
+        <mxCell id="external" value="External Data Agents (TSL APIs)&#10;&#10;• Fin Data&#10;• Relation&#10;• Event Details&#10;• Dev Structure&#10;&#10;Input: Legal Entity ID&#10;&#10;• Standard vs As-Reported&#10;• Parallel calls&#10;• Source prioritization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="80" width="380" height="280" as="geometry"/>
+        </mxCell>
+
+        <!-- INTERNAL AGENTS -->
+        <mxCell id="internal" value="Internal Data Agents&#10;&#10;• Cash Deposits&#10;• Loans&#10;&#10;Input: Client ID / CPI&#10;&#10;• Internal endpoints&#10;• Deterministic responses" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="420" width="380" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- OVERVIEW / THIN DATA -->
+        <mxCell id="overview" value="Overview / Thin Data Lambda&#10;&#10;Deterministic Logic (No AI)&#10;&#10;• Predefined metrics&#10;• Entity-type routing (Corp / Bank)&#10;• Converted Excel logic&#10;• Avoids large payloads" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="720" y="450" width="300" height="200" as="geometry"/>
+        </mxCell>
+
+        <!-- POST PROCESSING -->
+        <mxCell id="post" value="Post-Processing&#10;&#10;• Merge responses&#10;• As-Reported priority&#10;• Standard fallback&#10;• Data normalization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6e6e6;strokeColor=#666666;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="720" y="680" width="300" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- HISTORY -->
+        <mxCell id="history" value="Conversation Memory&#10;&#10;• Store (Q, A) pairs&#10;• Reload on each turn&#10;• Enables memory behavior" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="320" y="680" width="320" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- EDGES -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="user" target="context">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="context" target="orchestrator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="orchestrator" target="external">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="orchestrator" target="internal">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="orchestrator" target="overview">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="external" target="post">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="internal" target="post">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="overview" target="post">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="1" source="post" target="history">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
